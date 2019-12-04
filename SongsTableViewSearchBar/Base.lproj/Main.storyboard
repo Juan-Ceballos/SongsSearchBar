@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="d6p-1L-ows">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="191" width="414" height="671"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="songCell" textLabel="HC9-kl-TxI" detailTextLabel="lGF-N8-BHf" style="IBUITableViewCellStyleSubtitle" id="isb-GZ-gMm">
@@ -49,24 +49,36 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <searchBar contentMode="redraw" placeholder="enter song, artist" showsScopeBar="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nKh-I3-hpG">
+                                <rect key="frame" x="0.0" y="88" width="414" height="103"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Song</string>
+                                    <string>Artist</string>
+                                </scopeButtonTitles>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="nKh-I3-hpG" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="4Cz-yp-a7k"/>
+                            <constraint firstItem="d6p-1L-ows" firstAttribute="top" secondItem="nKh-I3-hpG" secondAttribute="bottom" id="7Xw-GY-6BG"/>
+                            <constraint firstItem="nKh-I3-hpG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="E8o-J4-jRZ"/>
                             <constraint firstItem="d6p-1L-ows" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="UDq-im-9L2"/>
                             <constraint firstItem="d6p-1L-ows" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="b2A-3p-BS0"/>
-                            <constraint firstItem="d6p-1L-ows" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="k0d-vK-XR7"/>
+                            <constraint firstItem="nKh-I3-hpG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="gmU-ac-DB6"/>
                             <constraint firstItem="d6p-1L-ows" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ntB-yN-rhw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="XlU-Xx-9Eu"/>
                     <connections>
+                        <outlet property="songSearchBar" destination="nKh-I3-hpG" id="uRq-k9-3kS"/>
                         <outlet property="songTableView" destination="d6p-1L-ows" id="iJY-12-1j2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="917" y="118"/>
+            <point key="canvasLocation" x="915.94202898550736" y="117.85714285714285"/>
         </scene>
         <!--Detailed Song Controller-->
         <scene sceneID="8Xc-Wz-DfZ">
@@ -75,10 +87,47 @@
                     <view key="view" contentMode="scaleToFill" id="dY1-GJ-6Nc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j7y-Gt-PMJ">
+                                <rect key="frame" x="0.0" y="343.5" width="414" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atm-KV-cQ7">
+                                <rect key="frame" x="0.0" y="303" width="414" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Gx-JK-tMF">
+                                <rect key="frame" x="87" y="384" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="8El-PL-teL"/>
+                                    <constraint firstAttribute="width" constant="240" id="NcK-dk-TjH"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="GX2-8X-k2m" firstAttribute="trailing" secondItem="atm-KV-cQ7" secondAttribute="trailing" id="0dk-bJ-9vb"/>
+                            <constraint firstItem="3Gx-JK-tMF" firstAttribute="centerX" secondItem="dY1-GJ-6Nc" secondAttribute="centerX" id="0wy-8m-c0E"/>
+                            <constraint firstItem="atm-KV-cQ7" firstAttribute="leading" secondItem="GX2-8X-k2m" secondAttribute="leading" id="1U4-Kr-hfx"/>
+                            <constraint firstItem="j7y-Gt-PMJ" firstAttribute="centerX" secondItem="dY1-GJ-6Nc" secondAttribute="centerX" id="1bT-2B-MTA"/>
+                            <constraint firstItem="j7y-Gt-PMJ" firstAttribute="leading" secondItem="GX2-8X-k2m" secondAttribute="leading" id="GMf-14-9kA"/>
+                            <constraint firstItem="j7y-Gt-PMJ" firstAttribute="top" secondItem="atm-KV-cQ7" secondAttribute="bottom" constant="20" id="OZ2-3e-1yk"/>
+                            <constraint firstItem="3Gx-JK-tMF" firstAttribute="centerY" secondItem="dY1-GJ-6Nc" secondAttribute="centerY" id="Ohv-Wn-b5k"/>
+                            <constraint firstItem="3Gx-JK-tMF" firstAttribute="top" secondItem="j7y-Gt-PMJ" secondAttribute="bottom" constant="20" id="RIz-2L-sdH"/>
+                            <constraint firstItem="GX2-8X-k2m" firstAttribute="trailing" secondItem="j7y-Gt-PMJ" secondAttribute="trailing" id="hnf-j0-qeI"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="GX2-8X-k2m"/>
                     </view>
                     <navigationItem key="navigationItem" id="JEY-TK-93q"/>
+                    <connections>
+                        <outlet property="artistLabel" destination="j7y-Gt-PMJ" id="fgp-yo-SmG"/>
+                        <outlet property="defaultImageView" destination="3Gx-JK-tMF" id="8GP-bf-pPu"/>
+                        <outlet property="songLabel" destination="atm-KV-cQ7" id="K5P-SL-sCd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RSV-h2-oeV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
